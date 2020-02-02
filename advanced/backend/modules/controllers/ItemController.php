@@ -28,9 +28,9 @@ class ItemController extends ActiveController
     }
 
 
-    public function actionAmr()
+    public function actionGetItems($sub_categoryId)
     {
-        return  Item::find()->with("itemSizes")->all();
+        return Item::find()->with("itemSizes")->where(["sub_category_id" => $sub_categoryId])->all();
     }
 
 }

@@ -2,13 +2,15 @@
 
 namespace backend\modules\controllers;
 
+use backend\modules\models\Category;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 
-class CategoryController extends ActiveController{
+class CategoryController extends ActiveController
+{
 
     public $modelClass = 'backend\modules\models\category';
 
@@ -25,4 +27,10 @@ class CategoryController extends ActiveController{
         ];
         return $behaviors;
     }
+
+    public function actionGetAll()
+    {
+        return Category::find()->all();
+    }
+
 }
