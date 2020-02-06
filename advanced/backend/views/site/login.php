@@ -1,42 +1,63 @@
 <?php
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
-$this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Sign In';
+
+$fieldOptions1 = [
+    'options' => ['class' => 'form-group has-feedback'],
+    'inputTemplate' => "{input}<span class='glyphicon glyphicon-envelope form-control-feedback'></span>"
+];
+
+$fieldOptions2 = [
+    'options' => ['class' => 'form-group has-feedback'],
+    'inputTemplate' => "{input}<span class='glyphicon glyphicon-lock form-control-feedback'></span>"
+];
 ?>
-<div class="limiter">
-    <div class="container-login100">
-        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-            <form id="login-form" action="/halime-sultan/advanced/backend/web/login" method="post">
-                <input type="hidden" name="_csrf-backend" value="5cm60dP9LlvHTDtntorZh9TEO4kIau34WISavdrJrXeB-_Omqc1LBPcadQmP85fFp_Vv82EiwMsX1tDqv4PMOw==">
-                <div class="form-group field-loginform-username required">
-					<span class="login100-form-title p-b-33">
-						Account Login
-					</span>
 
-                    <div class="wrap-input100 validate-input" data-validate="Valid username is required: ex@abc.xyz">
-                        <input type="text" id="loginform-username" placeholder="Username" class="input100" name="LoginForm[username]" autofocus aria-required="true">
-                        <span class="focus-input100-1"></span>
-                        <span class="focus-input100-2"></span>
-                    </div>
-
-
-                    <div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
-                        <input type="password" id="loginform-password" class="input100" name="LoginForm[password]" aria-required="true" placeholder="Password">
-                        <span class="focus-input100-1"></span>
-                        <span class="focus-input100-2"></span>
-                    </div>
-
-
-                    <div class="container-login100-form-btn m-t-20">
-                        <button class="login100-form-btn">
-                            Sign in
-                        </button>
-                    </div>
-            </form>
-        </div>
+<div class="login-box">
+    <div class="login-logo">
+        Halime Sultan
     </div>
-</div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in as admin</p>
+
+        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
+
+        <?= $form
+            ->field($model, 'username', $fieldOptions1)
+            ->label(false)
+            ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
+
+        <?= $form
+            ->field($model, 'password', $fieldOptions2)
+            ->label(false)
+            ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
+
+        <div class="row">
+            <div class="col-xs-8">
+                <?= $form->field($model, 'rememberMe')->checkbox() ?>
+            </div>
+            <!-- /.col -->
+            <div class="col-xs-4">
+                <?= Html::submitButton('Sign in', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
+            </div>
+            <!-- /.col -->
+        </div>
+
+
+        <?php ActiveForm::end(); ?>
+
+
+        <!-- /.social-auth-links -->
+
+        <a href="#">I forgot my password</a><br>
+
+    </div>
+    <!-- /.login-box-body -->
+</div><!-- /.login-box -->

@@ -27,11 +27,12 @@ use yii\widgets\ActiveForm;
     <?php } else {
         echo $form->field($model, 'password')->passwordInput(['maxlength' => true]);
     } ?>
+    <br/>
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList([ '10' => 'Active', '9' => 'Blocked', ]) ?>
 
-    <?= $form->field($model, 'type')->dropDownList([ 'admin' => 'Admin', 'user' => 'User', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'type')->dropDownList([ 'admin' => 'Admin', 'user' => 'User', ]) ?>
 
     <?= $form->field($model, 'phone_number')->textInput(['maxlength' => true]) ?>
 

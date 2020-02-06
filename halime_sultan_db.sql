@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2020 at 08:38 AM
+-- Generation Time: Feb 06, 2020 at 01:06 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -275,6 +275,7 @@ CREATE TABLE `user` (
   `type` enum('admin','user') NOT NULL DEFAULT 'user',
   `phone_number` varchar(255) NOT NULL,
   `verification_code` varchar(255) DEFAULT NULL,
+  `verified` tinyint(1) NOT NULL DEFAULT 0,
   `access_token` varchar(255) NOT NULL,
   `picture_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -283,10 +284,10 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `first_name`, `last_name`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `type`, `phone_number`, `verification_code`, `access_token`, `picture_id`) VALUES
-(1, 'root', 'Amr', 'Abu Aza', '', '$2y$13$xbFbJe68DGP9Tnkg/QW0S.APSPk6UU/EiKCRA4txbZ4BjrxRFCVvO', NULL, 'root@hotmail.com', 10, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'admin', '', NULL, '', NULL),
-(2, 'ahmad', 'ahmad', 'magableh', '???3fm\Z?t??m??A???p?a?;6yZ???	', '$2y$13$KjKsd6JL02/wykwDNeICLuckxXNFKEQAHZ/mwNRw4mPtqxpLhfsaW', NULL, 'ahmad@hotmail.com', 10, '0000-00-00 00:00:00', '2020-02-01 00:30:50', 'user', '12', NULL, '', NULL),
-(11, 'amr', '', '', 'lxf3K6F11p-nYm636rChXnoOZgmsWBCf9f92ce1b-a789-4c0f-a39d-b6ff51c623ce', '$2y$13$pvr7LFezPOvxQiQ1BdYr7uv8UW8z7AYiQ4fxCU4/GxaFN6PtQZGbm', NULL, 'amr@hotmail.com', 10, '2020-02-01 01:10:48', '2020-02-01 17:27:31', 'user', '12', NULL, '7YtgoXcgopX_QC6rEEJt4paXX3NbUZDZ3a12826f-2fcf-4433-a810-26620739016c', NULL);
+INSERT INTO `user` (`id`, `username`, `first_name`, `last_name`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `type`, `phone_number`, `verification_code`, `verified`, `access_token`, `picture_id`) VALUES
+(1, 'root', 'Amr', 'Abu Aza', '', '$2y$13$xbFbJe68DGP9Tnkg/QW0S.APSPk6UU/EiKCRA4txbZ4BjrxRFCVvO', NULL, 'root@hotmail.com', 10, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'admin', '', NULL, 0, '', NULL),
+(2, 'ahmad', 'ahmad', 'magableh', '', '$2y$13$x8/zRwVRCVVV8fzn6yeAhOCD6Ov6mBeNYM/rNaKsDgB2/8aTG7d/6', NULL, 'ahmad@hotmail.com', 10, '0000-00-00 00:00:00', '2020-02-05 17:53:15', 'admin', '12', NULL, 0, '', NULL),
+(11, 'amr', '', '', 'lxf3K6F11p-nYm636rChXnoOZgmsWBCf9f92ce1b-a789-4c0f-a39d-b6ff51c623ce', '$2y$13$pvr7LFezPOvxQiQ1BdYr7uv8UW8z7AYiQ4fxCU4/GxaFN6PtQZGbm', NULL, 'amr@hotmail.com', 10, '2020-02-01 01:10:48', '2020-02-01 17:27:31', 'user', '12', NULL, 1, '7YtgoXcgopX_QC6rEEJt4paXX3NbUZDZ3a12826f-2fcf-4433-a810-26620739016c', NULL);
 
 -- --------------------------------------------------------
 

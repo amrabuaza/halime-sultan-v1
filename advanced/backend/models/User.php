@@ -21,6 +21,7 @@ use Yii;
  * @property string $type
  * @property string $phone_number
  * @property string|null $verification_code
+ * @property int $verified
  * @property string $access_token
  * @property int|null $picture_id
  *
@@ -32,6 +33,30 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord
 {
+
+    const STATUS_DELETED = 9;
+    const STATUS_ACTIVE = 10;
+    public $password;
+
+    public function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert))
+        {
+            if(!$this->isNewRecord)
+            {
+                $this->updated_at = date("Y-m-d H:i:s");
+                if (isset($this->password)) {
+                    $this->setPassword($this->password);
+                    return true;
+                }
+            }else if($this->isNewRecord)
+            {
+                $this->created_at = date("Y-m-d H:i:s");
+            }
+            return true;
+        }return false;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -46,10 +71,11 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'first_name', 'last_name', 'auth_key', 'password_hash', 'email', 'phone_number', 'access_token'], 'required'],
-            [['status', 'picture_id'], 'integer'],
+            [['username', 'first_name', 'last_name',  'email', 'phone_number'], 'required'],
+            [['status', 'verified', 'picture_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['type'], 'string'],
+            [['password'], 'string'],
             [['username', 'first_name', 'last_name', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'phone_number', 'verification_code', 'access_token'], 'string', 'max' => 255],
             [['username'], 'unique'],
             [['email'], 'unique'],
@@ -77,6 +103,7 @@ class User extends \yii\db\ActiveRecord
             'type' => 'Type',
             'phone_number' => 'Phone Number',
             'verification_code' => 'Verification Code',
+            'verified' => 'Verified',
             'access_token' => 'Access Token',
             'picture_id' => 'Picture ID',
         ];
@@ -131,4 +158,9 @@ class User extends \yii\db\ActiveRecord
     {
         return $this->hasMany(UserOrderHestory::className(), ['user_id' => 'id']);
     }
+
+    public function setPassword($password) {
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+    }
+
 }

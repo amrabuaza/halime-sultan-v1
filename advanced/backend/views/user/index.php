@@ -12,8 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -30,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'username',
             'first_name',
             'last_name',
-            'auth_key',
+            //'auth_key',
             //'password_hash',
             //'password_reset_token',
             //'email:email',
@@ -38,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_at',
             //'updated_at',
             //'access_token',
-            //'type',
+            'type',
             //'phone_number',
             //'verification_code',
             //'picture_id',

@@ -6,15 +6,12 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\User */
 
-$this->title = $model->id;
+$this->title = $model->username;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="user-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -33,18 +30,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'username',
             'first_name',
             'last_name',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
             'email:email',
-            'status',
+            [
+                'label' => 'Status',
+                'value' => $model->status == 10 ? "Active" : "Blocked"
+            ],
+            [
+                'label' => 'Verified',
+                'value' => $model->verified == 1 ? "Yes" : "No"
+            ],
             'created_at',
             'updated_at',
-            'access_token',
             'type',
             'phone_number',
-            'verification_code',
-            'picture_id',
         ],
     ]) ?>
 
