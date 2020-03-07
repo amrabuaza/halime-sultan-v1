@@ -11,6 +11,8 @@ use Yii;
  * @property string $username
  * @property string $first_name
  * @property string $last_name
+ * @property string $gender
+ * @property string $birth_date
  * @property string $auth_key
  * @property string $password_hash
  * @property string|null $password_reset_token
@@ -24,6 +26,7 @@ use Yii;
  * @property int $verified
  * @property string $access_token
  * @property int|null $picture_id
+ * @property int $country_id
  *
  * @property Transaction[] $transactions
  * @property Transfer[] $transfers
@@ -40,21 +43,19 @@ class User extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-        if(parent::beforeSave($insert))
-        {
-            if(!$this->isNewRecord)
-            {
+        if (parent::beforeSave($insert)) {
+            if (!$this->isNewRecord) {
                 $this->updated_at = date("Y-m-d H:i:s");
                 if (isset($this->password)) {
                     $this->setPassword($this->password);
                     return true;
                 }
-            }else if($this->isNewRecord)
-            {
+            } else if ($this->isNewRecord) {
                 $this->created_at = date("Y-m-d H:i:s");
             }
             return true;
-        }return false;
+        }
+        return false;
     }
 
     /**
@@ -71,11 +72,12 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'first_name', 'last_name',  'email', 'phone_number'], 'required'],
-            [['status', 'verified', 'picture_id'], 'integer'],
+            [['username', 'first_name', 'last_name', 'email', 'phone_number', 'gender', 'birth_date'], 'required'],
+            [['status', 'verified', 'picture_id', 'country_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['type'], 'string'],
             [['password'], 'string'],
+            [['birth_date', 'created_at', 'updated_at'], 'safe'],
             [['username', 'first_name', 'last_name', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'phone_number', 'verification_code', 'access_token'], 'string', 'max' => 255],
             [['username'], 'unique'],
             [['email'], 'unique'],
@@ -93,6 +95,8 @@ class User extends \yii\db\ActiveRecord
             'username' => 'Username',
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
+            'gender' => 'Gender',
+            'birth_date' => 'Birth Date',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash',
             'password_reset_token' => 'Password Reset Token',
@@ -159,7 +163,13 @@ class User extends \yii\db\ActiveRecord
         return $this->hasMany(UserOrderHestory::className(), ['user_id' => 'id']);
     }
 
-    public function setPassword($password) {
+    public function getCountry()
+    {
+        return $this->hasOne(Country::className(), ['id' => 'country_id']);
+    }
+
+    public function setPassword($password)
+    {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
 

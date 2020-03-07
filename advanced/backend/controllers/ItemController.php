@@ -34,10 +34,10 @@ class ItemController extends Controller
                 'rules' => [
                     [
                         'actions' => ['create', 'delete', 'index', 'view', 'update',
-                            'add-size','update-size' ,
-                            'add-color' , 'update-color',
-                            'add-shipping' , 'update-shipping',
-                            'add-photo' , 'update-photo',
+                            'add-size', 'update-size',
+                            'add-color', 'update-color',
+                            'add-shipping', 'update-shipping',
+                            'add-photo', 'update-photo',
                         ],
                         'allow' => true,
                         'roles' => ['@'],
@@ -115,7 +115,8 @@ class ItemController extends Controller
     }
 
 
-    public function actionAddSize($id){
+    public function actionAddSize($id)
+    {
 
         $itemId = $this->findModel($id)->id;
         $itemSizes = [new ItemSize];
@@ -146,13 +147,14 @@ class ItemController extends Controller
         }
 
         return $this->render('_item-size', [
-            'itemId'=>$itemId,
-            'actionName'=>"Add",
+            'itemId' => $itemId,
+            'actionName' => "Add",
             'itemSizes' => (empty($itemSizes)) ? [new ItemSize] : $itemSizes,
         ]);
     }
 
-    public function actionUpdateSize($id){
+    public function actionUpdateSize($id)
+    {
         $item = $this->findModel($id);
         $itemId = $item->id;
         $itemSizes = $item->itemSizes;
@@ -190,13 +192,14 @@ class ItemController extends Controller
         }
 
         return $this->render('_item-size', [
-            'itemId'=>$itemId,
-            'actionName'=>"Update",
-            'itemSizes' =>  $itemSizes,
+            'itemId' => $itemId,
+            'actionName' => "Update",
+            'itemSizes' => $itemSizes,
         ]);
     }
 
-    public function actionAddColor($id){
+    public function actionAddColor($id)
+    {
 
         $itemId = $this->findModel($id)->id;
         $itemColors = [new ItemColor];
@@ -227,13 +230,14 @@ class ItemController extends Controller
         }
 
         return $this->render('_item-color', [
-            'itemId'=>$itemId,
-            'actionName'=>"Add",
+            'itemId' => $itemId,
+            'actionName' => "Add",
             'itemColors' => (empty($itemColors)) ? [new ItemColor] : $itemColors,
         ]);
     }
 
-    public function actionUpdateColor($id){
+    public function actionUpdateColor($id)
+    {
         $item = $this->findModel($id);
         $itemId = $item->id;
         $itemColors = $item->itemColors;
@@ -241,6 +245,7 @@ class ItemController extends Controller
         if (Model::loadMultiple($itemColors, Yii::$app->request->post()) && Model::validateMultiple($itemColors)) {
 
             $transaction = \Yii::$app->db->beginTransaction();
+
 
             $oldColorIDs = ArrayHelper::map($itemColors, 'id', 'id');
             $itemColors = Model::createMultiple(ItemColor::classname(), $itemColors);
@@ -271,13 +276,14 @@ class ItemController extends Controller
         }
 
         return $this->render('_item-color', [
-            'itemId'=>$itemId,
-            'actionName'=>"Update",
-            'itemColors' =>  $itemColors,
+            'itemId' => $itemId,
+            'actionName' => "Update",
+            'itemColors' => $itemColors,
         ]);
     }
 
-    public function actionAddPhoto($id){
+    public function actionAddPhoto($id)
+    {
 
         $itemId = $this->findModel($id)->id;
         $itemPhotos = [new ItemPhoto];
@@ -288,12 +294,18 @@ class ItemController extends Controller
             $transaction = \Yii::$app->db->beginTransaction();
 
             try {
+
+                // to create directory in uploads for this month and this year ..
+                $currentDate = date('Y-m');
+                $this->createDirectoryOfCurrentMonthIfNotExists($currentDate);
+
+
                 foreach ($itemPhotos as $index => $modelPhoto) {
                     $modelPhoto->item_id = $itemId;
 
                     $image = UploadedFile::getInstanceByName("ItemPhoto[" . $index . "][upload_image]");
                     if ($image != null) {
-                        $modelPhoto->name = $this->guid() . '_' . $image->baseName . '.' . $image->extension;
+                        $modelPhoto->name = $currentDate . "/" . $this->guid() . '.' . $image->extension;
                     }
 
 
@@ -318,13 +330,14 @@ class ItemController extends Controller
         }
 
         return $this->render('_item-photo', [
-            'itemId'=>$itemId,
-            'actionName'=>"Add",
+            'itemId' => $itemId,
+            'actionName' => "Add",
             'itemPhotos' => (empty($itemPhotos)) ? [new ItemPhoto] : $itemPhotos,
         ]);
     }
 
-    public function actionUpdatePhoto($id){
+    public function actionUpdatePhoto($id)
+    {
         $item = $this->findModel($id);
         $itemId = $item->id;
         $itemPhotos = $item->itemPhotos;
@@ -334,20 +347,29 @@ class ItemController extends Controller
             $transaction = \Yii::$app->db->beginTransaction();
 
             $oldPhotoIDs = ArrayHelper::map($itemPhotos, 'id', 'id');
-            $itemPhotos = Model::createMultiple(ItemPhoto::classname(), $itemPhotos);
             Model::loadMultiple($itemPhotos, Yii::$app->request->post());
+
+            $itemPhotos = Model::createMultiple(ItemPhoto::classname(), $itemPhotos);
+
             $deletedPhotoIDs = array_diff($oldPhotoIDs, array_filter(ArrayHelper::map($itemPhotos, 'id', 'id')));
 
             try {
                 if (!empty($deletedPhotoIDs)) {
                     ItemPhoto::deleteAll(['id' => $deletedPhotoIDs]);
                 }
+
+                // to create directory in uploads for this month and this year ..
+                $currentDate = date('Y-m');
+                $this->createDirectoryOfCurrentMonthIfNotExists($currentDate);
+
                 foreach ($itemPhotos as $index => $modelPhoto) {
+
                     $modelPhoto->item_id = $itemId;
 
                     $image = UploadedFile::getInstanceByName("ItemPhoto[" . $index . "][upload_image]");
                     if ($image != null) {
-                        $modelPhoto->name = $this->guid() . '_' . $image->baseName . '.' . $image->extension;
+
+                        $modelPhoto->name = $currentDate . "/" . $this->guid() . '.' . $image->extension;
                     }
 
 
@@ -372,9 +394,9 @@ class ItemController extends Controller
         }
 
         return $this->render('_item-photo', [
-            'itemId'=>$itemId,
-            'actionName'=>"Update",
-            'itemPhotos' =>  $itemPhotos,
+            'itemId' => $itemId,
+            'actionName' => "Update",
+            'itemPhotos' => $itemPhotos,
         ]);
     }
 
@@ -395,7 +417,7 @@ class ItemController extends Controller
 
     public function actionUpdateShipping($id)
     {
-        $model = ItemShippingPrice::findOne(["item_id"=>$id]);
+        $model = ItemShippingPrice::findOne(["item_id" => $id]);
         $model->item_weight = Item::findOne($id)->weight;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -435,6 +457,13 @@ class ItemController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    private function createDirectoryOfCurrentMonthIfNotExists($currentDate)
+    {
+        if (!file_exists("uploads/" . $currentDate)) {
+            mkdir("uploads/" . $currentDate);
+        }
     }
 
     function guid()

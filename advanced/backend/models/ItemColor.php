@@ -57,4 +57,13 @@ class ItemColor extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Item::className(), ['id' => 'item_id']);
     }
+
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        unset($fields['item_id']);
+        return $fields;
+    }
+
 }

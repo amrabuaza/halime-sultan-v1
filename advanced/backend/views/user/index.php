@@ -13,37 +13,22 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-index">
 
     <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+        <?=Html::a('Add User', ['create'], ['class' => 'btn btn-success'])?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
+    <?=GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'username',
-            'first_name',
-            'last_name',
-            //'auth_key',
-            //'password_hash',
-            //'password_reset_token',
-            //'email:email',
-            //'status',
-            //'created_at',
-            //'updated_at',
-            //'access_token',
+            'phone_number',
             'type',
-            //'phone_number',
-            //'verification_code',
-            //'picture_id',
-
+            'email:email',
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);?>
 
 
 </div>

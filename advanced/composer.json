@@ -19,10 +19,16 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "dmstr/yii2-adminlte-asset": "^2.1",
-		"wbraganca/yii2-dynamicform": "@dev",
+		"baha2odeh/yii2-dynamicform" : "dev-master",
 		"kartik-v/yii2-widget-select2": "@dev",
 		"baha2odeh/yii2-easy-fileupload-behavior": "*",
-		"kartik-v/yii2-widget-fileinput": "@dev"
+		"kartik-v/yii2-widget-fileinput": "@dev",
+		"filipajdacic/yii2-twilio": "@dev",
+        "wadeshuler/yii2-sms-twilio": "^1.0",
+        "2amigos/yii2-twilio-component": "^1.0",
+        "2amigos/yii2-nexmo-library": "~1.0",
+        "nexmo/client": "^2.0",
+		"yiisoft/yii2-jui": "~2.0.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
@@ -42,10 +48,6 @@
         }
     },
     "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Baha2Odeh/yii2-dynamicform"
-        },
         {
             "type": "composer",
             "url": "https://asset-packagist.org"

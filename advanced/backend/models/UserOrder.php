@@ -11,7 +11,6 @@ use Yii;
  * @property string $status
  * @property float $total
  * @property int $user_id
- * @property int $user_address_id
  * @property int $promo_code_id
  * @property int $transaction_id
  * @property int $transfer_id
@@ -19,12 +18,11 @@ use Yii;
  * @property string $updated_at
  *
  * @property ItemFeadback[] $itemFeadbacks
- * @property OrderItems[] $orderItems
+ * @property OrderItem[] $orderItems
  * @property PromoCode $promoCode
  * @property Transaction $transaction
  * @property Transfer $transfer
  * @property User $user
- * @property UserAddress $userAddress
  * @property UserOrderHestory[] $userOrderHestories
  */
 class UserOrder extends \yii\db\ActiveRecord
@@ -43,16 +41,15 @@ class UserOrder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['status', 'total', 'user_id', 'user_address_id', 'promo_code_id', 'transaction_id', 'transfer_id'], 'required'],
+            [['status', 'total', 'user_id', 'promo_code_id', 'transaction_id', 'transfer_id'], 'required'],
             [['status'], 'string'],
             [['total'], 'number'],
-            [['user_id', 'user_address_id', 'promo_code_id', 'transaction_id', 'transfer_id'], 'integer'],
+            [['user_id', 'promo_code_id', 'transaction_id', 'transfer_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['promo_code_id'], 'exist', 'skipOnError' => true, 'targetClass' => PromoCode::className(), 'targetAttribute' => ['promo_code_id' => 'id']],
             [['transaction_id'], 'exist', 'skipOnError' => true, 'targetClass' => Transaction::className(), 'targetAttribute' => ['transaction_id' => 'id']],
             [['transfer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Transfer::className(), 'targetAttribute' => ['transfer_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
-            [['user_address_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserAddress::className(), 'targetAttribute' => ['user_address_id' => 'id']],
         ];
     }
 
@@ -66,7 +63,6 @@ class UserOrder extends \yii\db\ActiveRecord
             'status' => 'Status',
             'total' => 'Total',
             'user_id' => 'User ID',
-            'user_address_id' => 'User Address ID',
             'promo_code_id' => 'Promo Code ID',
             'transaction_id' => 'Transaction ID',
             'transfer_id' => 'Transfer ID',
@@ -92,7 +88,7 @@ class UserOrder extends \yii\db\ActiveRecord
      */
     public function getOrderItems()
     {
-        return $this->hasMany(OrderItems::className(), ['order_id' => 'id']);
+        return $this->hasMany(OrderItem::className(), ['order_id' => 'id']);
     }
 
     /**
@@ -133,16 +129,6 @@ class UserOrder extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
-    }
-
-    /**
-     * Gets query for [[UserAddress]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUserAddress()
-    {
-        return $this->hasOne(UserAddress::className(), ['id' => 'user_address_id']);
     }
 
     /**

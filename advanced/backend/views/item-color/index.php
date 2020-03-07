@@ -12,10 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-color-index">
 
-    <p>
-        <?= Html::a('Add Item Color', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -34,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $item_name;
                 },
             ],
+            'item_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

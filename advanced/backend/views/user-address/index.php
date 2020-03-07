@@ -22,8 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'country',
             'city',
             'region',
@@ -34,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'Username',
                 'value' => function ($model, $key, $index, $column) {
-                    $username = \backend\models\User::findOne($model->user_id)->name;
+                    $username = \backend\models\User::findOne($model->user_id)->username;
                     return $username;
                 },
             ],

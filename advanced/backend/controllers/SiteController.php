@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\controllers;
 
 use Yii;
@@ -26,7 +27,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'amr'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -74,9 +75,9 @@ class SiteController extends Controller
             return $this->goHome();
         }
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) ) {
-            $model->type="admin";
-            if($model->login())
+        if ($model->load(Yii::$app->request->post())) {
+            $model->type = "admin";
+            if ($model->login())
                 return $this->goBack();
         }
         return $this->render('login', [
@@ -95,4 +96,13 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
+
+    public function actionAmr()
+    {
+
+    }
+
+
+
 }

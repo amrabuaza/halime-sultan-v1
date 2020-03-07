@@ -27,12 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'color',
             [
                 'label' => 'Item Name',
                 'value' => \backend\models\Item::findOne($model->item_id)->name
             ],
+
         ],
     ]) ?>
 

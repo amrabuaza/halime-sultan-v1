@@ -19,6 +19,7 @@ class ItemPhoto extends \yii\db\ActiveRecord
 {
 
     public $upload_image;
+
     /**
      * {@inheritdoc}
      */
@@ -34,7 +35,7 @@ class ItemPhoto extends \yii\db\ActiveRecord
     {
         return [
             [['item_id'], 'integer'],
-            [['upload_image'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
+            [['upload_image'],'safe'],
             [['name'], 'string', 'max' => 255],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
         ];
@@ -61,4 +62,21 @@ class ItemPhoto extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Item::className(), ['id' => 'item_id']);
     }
+
+
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        unset($fields['id']);
+        unset($fields['item_id']);
+        unset($fields['name']);
+
+        $fields['url'] = function ($model) {
+            $uploadsUrl = "http://localhost/halime-sultan/advanced/backend/web/uploads/";
+            return $uploadsUrl . $this->name;
+        };
+        return $fields;
+    }
+
 }

@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'apartment_number',
             [
                 'label' => 'Username',
-                'value' => \backend\models\User::findOne($model->user_id)->name
+                'value' => \backend\models\User::findOne($model->user_id)->username
             ],
         ],
     ]) ?>

@@ -61,7 +61,7 @@ class Category extends \yii\db\ActiveRecord
     {
         $fields = parent::fields();
 
-        $fields['sub-categories'] = function ($model) {
+        $fields['sub_categories'] = function ($model) {
             return $this->subCategories;
         };
 

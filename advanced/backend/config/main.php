@@ -17,10 +17,17 @@ return [
         ],
     ],
     'components' => [
+        'twilio' => [
+            'class' => '\dosamigos\twilio\TwilioComponent',
+            'sid' => 'ACfe60187d4b66f84e8e77fb5be7879e25',
+            'token' => 'b03f5095d121cd0a817fa8192dbddc7f',
+            'phoneNumber' => '+14803761123'
+        ],
         'request' => [
             'parsers' => [
-                'application/json'  => 'yii\web\JsonParser',
-            ],
+                'application/json' => 'yii\web\JsonParser',
+                'multipart/form-data' => 'yii\web\MultipartFormDataParser'
+            ]
         ],
         'view' => [
             'theme' => [
@@ -58,21 +65,21 @@ return [
                 'user-order-hestories/index' => 'user-order-hestory/index',
                 'user-order-hestories/view' => 'user-order-hestory/view',
 
-                'sub-categories'=>'sub-category/index',
+                'sub-categories' => 'sub-category/index',
+                'countries' => 'country/index',
 
-                'base-categories'=>'category/index',
-                'base-category/create'=>'category/create',
-                'base-category/update'=>'category/update',
-                'base-category/view'=>'category/view',
+                'base-categories' => 'category/index',
+                'base-category/create' => 'category/create',
+                'base-category/update' => 'category/update',
+                'base-category/view' => 'category/view',
 
-                'profile'=>'user/view',
-                'login'=>'site/login',
+                'profile' => 'user/view',
+                'login' => 'site/login',
                 '<controller:[\w-]+>s' => '<controller>',
                 '<controller:[\w-]+>/<id:\d+>' => '<controller>/view',
                 '<controller:[\w-]+>/<id:\d+>' => '<controller>/delete',
                 '<controller:[\w-]+>/<id:\d+>' => '<controller>/update',
 
-                '<private-api><controller:[\w-]+>s' => '<private-api><controller>/index',
             ],
         ],
     ],

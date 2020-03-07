@@ -1,6 +1,5 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -12,9 +11,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-photo-index">
 
-    <p>
-        <?= Html::a('Add Item Photo', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 

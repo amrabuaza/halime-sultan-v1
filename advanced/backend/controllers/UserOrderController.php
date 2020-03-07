@@ -25,7 +25,7 @@ class UserOrderController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['create','delete','index','view','update','add-category-name'],
+                        'actions' => ['create','delete','index','view','update'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

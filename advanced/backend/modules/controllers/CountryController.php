@@ -2,21 +2,17 @@
 
 namespace backend\modules\controllers;
 
-use backend\modules\models\Category;
-use yii\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBasicAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
+use backend\models\Country;
 use yii\filters\Cors;
-use yii\helpers\ArrayHelper;
 use yii\rest\ActiveController;
 
-class CategoryController extends ActiveController
+class CountryController extends ActiveController
 {
 
-    public $modelClass = 'backend\modules\models\category';
+    public $modelClass = 'backend\models\country';
 
-    public function actions() {
+    public function actions()
+    {
         $actions = parent::actions();
         unset($actions['index']);
         unset($actions['create']);
@@ -40,17 +36,12 @@ class CategoryController extends ActiveController
             ],
         ];
 
-        $behaviors['authenticator'] = [
-            'class' =>  HttpBearerAuth::className(),
-            'except' => ['options'],
-        ];
-
         return $behaviors;
     }
 
     public function actionGetAll()
     {
-        return Category::find()->all();
+        return Country::find()->all();
     }
 
 }

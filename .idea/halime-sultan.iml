@@ -2,12 +2,16 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/2amigos/yii2-nexmo-library" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/2amigos/yii2-twilio-component" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/almasaeed2010/adminlte" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/baha2odeh/yii2-dynamicform" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/baha2odeh/yii2-easy-fileupload-behavior" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/behat/gherkin" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/bower-asset/bootstrap" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/bower-asset/inputmask" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/bower-asset/jquery" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/bower-asset/jquery-ui" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/bower-asset/punycode" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/bower-asset/yii2-pjax" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/cebe/markdown" />
@@ -27,17 +31,27 @@
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/doctrine/lexer" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/egulias/email-validator" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/ezyang/htmlpurifier" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/filipajdacic/yii2-twilio" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/fortawesome/font-awesome" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/fzaninotto/faker" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/guzzlehttp/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/guzzlehttp/promises" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/guzzlehttp/psr7" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/kartik-v/bootstrap-fileinput" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/kartik-v/yii2-krajee-base" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/kartik-v/yii2-widget-fileinput" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/kartik-v/yii2-widget-select2" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/lcobucci/jwt" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/myclabs/deep-copy" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/nexmo/client" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/nexmo/client-core" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/ocramius/package-versions" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/opis/closure" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/phar-io/manifest" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/phar-io/version" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/php-http/guzzle6-adapter" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/php-http/httplug" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/php-http/promise" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/phpdocumentor/reflection-common" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/phpdocumentor/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/phpdocumentor/type-resolver" />
@@ -51,6 +65,8 @@
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/phpunit/phpunit" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/psr/container" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/psr/event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/psr/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/psr/http-factory" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/psr/http-message" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/ralouphie/getallheaders" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/rmrevin/yii2-fontawesome" />
@@ -84,7 +100,9 @@
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/symfony/service-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/symfony/yaml" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/theseer/tokenizer" />
-      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/wbraganca/yii2-dynamicform" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/twilio/sdk" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/wadeshuler/yii2-sms" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/wadeshuler/yii2-sms-twilio" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/yiisoft/yii2" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/yiisoft/yii2-bootstrap" />
@@ -92,7 +110,9 @@
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/yiisoft/yii2-debug" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/yiisoft/yii2-faker" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/yiisoft/yii2-gii" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/yiisoft/yii2-jui" />
       <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/yiisoft/yii2-swiftmailer" />
+      <excludeFolder url="file://$MODULE_DIR$/advanced/vendor/zendframework/zend-diactoros" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

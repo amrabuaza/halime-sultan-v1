@@ -13,10 +13,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="promo-code-index">
 
     <p>
-        <?= Html::a('Create Promo Code', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add Promo Code', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

@@ -12,9 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-size-index">
 
-    <p>
-        <?= Html::a('Add Item Size', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -33,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $item_name;
                 },
             ],
+            'item_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
