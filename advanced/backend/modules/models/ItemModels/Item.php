@@ -5,6 +5,7 @@ namespace backend\modules\models;
 use backend\models\ItemColor;
 use backend\models\ItemFeadback;
 use backend\models\ItemPhoto;
+use backend\modules\models\ItemModels\ItemQuantityInStock;
 use backend\models\ItemSize;
 use backend\models\OrderItems;
 use backend\models\SubCategory;
@@ -27,6 +28,7 @@ use Yii;
  * @property ItemPhoto[] $itemPhotos
  * @property ItemSize[] $itemSizes
  * @property OrderItems[] $orderItems
+ * @property ItemQuantityInStock $itemQuantity
  */
 class Item extends \yii\db\ActiveRecord
 {
@@ -128,9 +130,18 @@ class Item extends \yii\db\ActiveRecord
         return $this->hasMany(OrderItems::className(), ['item_id' => 'id']);
     }
 
+    public function getItemQuantity()
+    {
+        return $this->hasOne(ItemQuantityInStock::className(), ['item_id' => 'id']);
+    }
+
     public function fields()
     {
         $fields = parent::fields();
+
+        $fields['quantity'] = function ($model) {
+            return $this->itemQuantity;
+        };
 
         $fields['sizes'] = function ($model) {
             return $this->itemSizes;
